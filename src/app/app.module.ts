@@ -9,7 +9,10 @@ import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { budgetEffects } from './store/effects/budget.effects';
+import {
+  budgetEffects,
+  enterExpenseEffect,
+} from './store/effects/budget.effects';
 import { budgetReducer } from './store/reducers/budget.reducer';
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +21,7 @@ import { budgetReducer } from './store/reducers/budget.reducer';
     AppRoutingModule,
     ComponentsModule,
     StoreModule.forRoot({ budget: budgetReducer }),
-    EffectsModule.forRoot([budgetEffects]),
+    EffectsModule.forRoot([budgetEffects, enterExpenseEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
