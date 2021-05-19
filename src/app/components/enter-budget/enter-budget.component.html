@@ -1,29 +1,22 @@
 <div class="row animate__animated animate__fadeIn">
-  <div class="col-lg-6">
+  <form class="col-lg-6" [formGroup]="amountForm" (ngSubmit)="add()">
     <h2 class="text-center font-title">Enter your budget</h2>
     <div class="card shadow-sm mt-3">
       <div class="card-body">
-        <div
-          *ngIf="incorrectAmount"
-          class="text-center mb-3 animate__animated animate__fadeIn"
-        >
-          <span class="badge bg-danger text-error"
-            >¡The budget must be greater than 0!</span
-          >
-        </div>
         <input
           type="number"
           class="form-control form-control-lg"
           placeholder="Enter your budget..."
-          [(ngModel)]="amount"
+          formControlName="amount"
         />
         <button
-          (click)="add()"
+          type="submit"
+          [disabled]="amountForm.invalid"
           class="btn btn-secondary btn-lg btn-block mt-2 w-100"
         >
           OK
         </button>
       </div>
     </div>
-  </div>
+  </form>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { enterBudget } from '../../store/actions/budget.actions';
@@ -9,22 +10,31 @@ import { enterBudget } from '../../store/actions/budget.actions';
   styleUrls: ['./enter-budget.component.scss'],
 })
 export class EnterBudgetComponent implements OnInit {
-  public amount: number;
-  public incorrectAmount: boolean = false;
+  public amountForm: FormGroup;
 
-  constructor(private router: Router, private store: Store) {}
+  constructor(
+    private router: Router,
+    private store: Store,
+    private fb: FormBuilder
+  ) {
+    this.amountForm = this.fb.group({
+      amount: ['', [Validators.required, Validators.min(1)]],
+    });
+  }
 
   ngOnInit(): void {}
 
   add(): void {
-    if (this.amount !== 0) {
+    if (this.amountForm.get('amount').value !== 0) {
       this.store.dispatch(
-        enterBudget({ amount: this.amount, rest: this.amount })
+        enterBudget({
+          amount: this.amountForm.get('amount').value,
+          rest: this.amountForm.get('amount').value,
+        })
       );
-      this.incorrectAmount = false;
       this.router.navigate(['/expenses']);
     } else {
-      this.incorrectAmount = true;
+      this.amountForm.markAllAsTouched();
     }
   }
 }

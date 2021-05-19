@@ -6,7 +6,10 @@
       <div class="col-lg-6 alert alert-success">
         Budget: <strong>{{ budget.budget | currency }}</strong>
       </div>
-      <div class="col-lg-6 alert alert-secondary">
+      <div
+        class="col-lg-6 alert alert-secondary"
+        [ngClass]="{ 'alert-danger': budget.remaining <= 0 }"
+      >
         Remaining: <strong>{{ budget.remaining | currency }}</strong>
       </div>
     </div>
