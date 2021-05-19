@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BudgetService } from 'src/app/services/budget.service';
 import { enterBudget } from '../../store/actions/budget.actions';
 
 @Component({
@@ -13,11 +12,7 @@ export class EnterBudgetComponent implements OnInit {
   public amount: number;
   public incorrectAmount: boolean = false;
 
-  constructor(
-    private budgetService: BudgetService,
-    private router: Router,
-    private store: Store
-  ) {}
+  constructor(private router: Router, private store: Store) {}
 
   ngOnInit(): void {}
 
@@ -27,8 +22,6 @@ export class EnterBudgetComponent implements OnInit {
         enterBudget({ amount: this.amount, rest: this.amount })
       );
       this.incorrectAmount = false;
-      this.budgetService.budget = this.amount;
-      this.budgetService.remaining = this.amount;
       this.router.navigate(['/expenses']);
     } else {
       this.incorrectAmount = true;

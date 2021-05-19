@@ -1,1 +1,21 @@
-<p>expenses works!</p>
+<ng-container
+  *ngIf="{
+    expenses: budget$ | async
+  } as budget"
+>
+  <div class="container mt-5">
+    <h2 class="text-center font-title">Expenses</h2>
+    <div class="card mt-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <app-enter-expense></app-enter-expense>
+          </div>
+          <div class="col-lg-6">
+            <app-expense-list></app-expense-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
