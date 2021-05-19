@@ -22,7 +22,12 @@ export class EnterExpenseComponent implements OnInit {
 
   enterExpense(): void {
     console.log(this.expenseForm.value);
-    this.store.dispatch(enterExpense(this.expenseForm.get('amount').value));
+    this.store.dispatch(
+      enterExpense({
+        expense: this.expenseForm.value,
+        rest: this.expenseForm.get('amount').value,
+      })
+    );
   }
 
   get expenseInvalid(): boolean {
