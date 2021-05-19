@@ -17,7 +17,7 @@ export class EnterBudgetComponent implements OnInit {
   ngOnInit(): void {}
 
   add(): void {
-    if (this.amount > 0) {
+    if (this.amount !== 0) {
       this.store.dispatch(
         enterBudget({ amount: this.amount, rest: this.amount })
       );

@@ -21,13 +21,17 @@ export class EnterExpenseComponent implements OnInit {
   ngOnInit(): void {}
 
   enterExpense(): void {
-    console.log(this.expenseForm.value);
-    this.store.dispatch(
-      enterExpense({
-        expense: this.expenseForm.value,
-        rest: this.expenseForm.get('amount').value,
-      })
-    );
+    if (this.expenseForm.valid) {
+      this.store.dispatch(
+        enterExpense({
+          expense: this.expenseForm.value,
+          rest: this.expenseForm.get('amount').value,
+        })
+      );
+      this.expenseForm.reset();
+    } else {
+      this.expenseForm.markAllAsTouched();
+    }
   }
 
   get expenseInvalid(): boolean {

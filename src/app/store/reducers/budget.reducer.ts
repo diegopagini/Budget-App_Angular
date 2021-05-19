@@ -16,7 +16,7 @@ const _budgetReducer = createReducer(
   })),
   on(enterExpense, (state, { expense, rest }) => ({
     ...state,
-    budget: state.budget - rest,
+    remaining: state.budget - rest,
     expenses: [...state.expenses, expense],
   }))
 );

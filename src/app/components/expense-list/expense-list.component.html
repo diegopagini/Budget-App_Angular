@@ -1,1 +1,42 @@
-<p>expense-list works!</p>
+<ng-container *ngIf="budget$ | async as budget">
+  <div class="animate__animated animate__fadeIn">
+    <h4 class="text-center">List of Expenses</h4>
+    <hr />
+    <div class="row">
+      <div class="col-lg-6 alert alert-success">
+        Budget: <strong>{{ budget.budget | currency }}</strong>
+      </div>
+      <div class="col-lg-6 alert alert-secondary">
+        Remaining: <strong>{{ budget.remaining | currency }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="budget.expenses?.length >= 1; else noListOfExpenses">
+    <div class="row animate__animated animate__fadeIn">
+      <h4 class="text-center">List of Expenses</h4>
+      <hr />
+      <ul class="list-group list-group-flush">
+        <li
+          class="
+            list-group-item
+            animate__animated animate__fadeIn
+            d-flex
+            justify-content-between
+          "
+          *ngFor="let list of budget.expenses; let i = index"
+        >
+          <span>{{ list.expense }}</span>
+          <span>{{ list.amount | currency }}</span>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #noListOfExpenses>
+  <div class="animate__animated animate__fadeIn">
+    <h4 class="text-center">No expenses yet...</h4>
+    <hr />
+  </div>
+</ng-template>

@@ -1,8 +1,4 @@
-<ng-container
-  *ngIf="{
-    expenses: budget$ | async
-  } as budget"
->
+<ng-container *ngIf="budget$" | async>
   <div class="container mt-5">
     <h2 class="text-center font-title">Expenses</h2>
     <div class="card mt-4">
